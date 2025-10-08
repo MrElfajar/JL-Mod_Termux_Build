@@ -38,6 +38,8 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.preference.PreferenceManager;
 
 import java.io.File;
+import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
 import ru.playsoftware.j2meloader.applist.AppListModel;
 import ru.playsoftware.j2meloader.applist.AppsListFragment;
@@ -84,7 +86,11 @@ public class MainActivity extends AppCompatActivity {
 			preferences.edit().putBoolean(Constants.PREF_TOOLBAR, enable).apply();
 		}
 		setVolumeControlStream(AudioManager.STREAM_MUSIC);
-	}
+        
+        BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from(findViewById(R.id.bottom_navigation_container));
+        AppBarLayout mAppBar = (AppBarLayout) findViewById(R.id.app_bar);
+        bottomSheetBehavior.setPeekHeight(100);
+		}
 
 	private void checkAndCreateDirs() {
 		String emulatorDir = Config.getEmulatorDir();

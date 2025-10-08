@@ -10,6 +10,7 @@ tasks.register<Delete>("clean") {
 }
 
 val compileSdk by extra(34)
-val minSdk by extra(14)
+val minSdk by extra(24)
 val targetSdk by extra(34)
-val ndkVersion by extra("22.1.7171670")
+val ndkVersion by extra("29.0.14033849")
+

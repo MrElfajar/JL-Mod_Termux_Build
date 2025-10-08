@@ -1,0 +1,10 @@
+cmake_minimum_required(VERSION 3.18.1)
+
+project("app")
+
+# Instead of all-subdir-makefiles, use add_subdirectory
+add_subdirectory(m3g)
+add_subdirectory(micro3d)
+add_subdirectory(mmapicommon)
+
+# Your main CMakeLists.txt can link everything

@@ -17,3 +17,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "JL-Mod"
 include(":app", ":dexlib")
+

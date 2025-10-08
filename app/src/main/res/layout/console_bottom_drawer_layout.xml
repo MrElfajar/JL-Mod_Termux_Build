@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+     xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:app="http://schemas.android.com/apk/res-auto"
+     android:layout_height="wrap_content"
+     android:layout_width="match_parent"
+     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+     android:background="#ffffff"
+     android:elevation="1dp"
+     android:orientation="vertical"
+     android:fitsSystemWindows="true"
+     android:id="@+id/bottom_navigation_container"
+     app:behavior_hideable="false">
+
+    <com.google.android.material.appbar.AppBarLayout
+         android:layout_height="200dp"
+         android:layout_width="match_parent"
+         app:elevation="0dp"
+         android:id="@+id/app_bar">
+
+        <androidx.appcompat.widget.Toolbar
+             android:layout_height="match_parent"
+             android:layout_width="wrap_content"
+             app:title="Console Reports"
+             app:contentInsetStart="0dp"
+             app:contentInsetEnd="0dp"
+             android:theme="?attr/actionBarTheme"
+             android:id="@+id/my_toolbar" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+         android:layout_height="wrap_content"
+         android:layout_width="match_parent"
+         android:layout_marginVertical="15dp"
+         android:minHeight="40dp"
+         android:padding="3dp"
+         android:scrollbarAlwaysDrawHorizontalTrack="true"
+         android:id="@+id/rvConsoleData"
+         android:layout_gravity="bottom" />
+
+</LinearLayout>

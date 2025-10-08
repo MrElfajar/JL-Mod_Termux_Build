@@ -23,6 +23,11 @@ android {
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
+       
+       
+    
+    
+    
 
     androidResources {
         generateLocaleConfig = true
@@ -35,16 +40,20 @@ android {
     }
 
     signingConfigs {
-        create("emulator") {
+
+        create("emulator"){
             rootProject.file("keystore.properties").takeIf(File::isFile)?.inputStream().use {
+            
                 val keystoreProperties = Properties()
                 keystoreProperties.load(it)
                 keyAlias = keystoreProperties["keyAlias"] as String
                 keyPassword = keystoreProperties["keyPassword"] as String
                 storeFile = rootProject.file(keystoreProperties["storeFile"] as String)
                 storePassword = keystoreProperties["storePassword"] as String
+                
             }
         }
+        
     }
 
     buildTypes {
@@ -75,35 +84,37 @@ android {
                 "proguard-rules.pro"
             )
         }
-        create("midlet") { // variant dimension for create android port from J2ME app source
-            buildConfigField("boolean", "FULL_EMULATOR", "false")
-            // configure midlet's port project params here, as default it read from app manifest,
-            // placed to 'app/src/midlet/resources/MIDLET-META-INF/MANIFEST.MF'
-            val props = getMidletManifestProperties()
-            val midletName = props?.getValue("MIDlet-Name")?.trim() ?: "Demo MIDlet"
-            val apkName = midletName.replace("[/\\\\:*?\"<>|]".toRegex(), "").replace(" ", "_")
-            applicationId = "com.example.androidlet.${apkName.lowercase(Locale.getDefault())}"
-            versionName = props?.getValue("MIDlet-Version") ?: "1.0"
-            resValue("string", "app_name", midletName)
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-midlet.pro"
-            )
-        }
+        // create("midlet") { // variant dimension for create android port from J2ME app source
+        //     buildConfigField("boolean", "FULL_EMULATOR", "false")
+        //     // configure midlet's port project params here, as default it read from app manifest,
+        //     // placed to 'app/src/midlet/resources/MIDLET-META-INF/MANIFEST.MF'
+        //     val props = getMidletManifestProperties()
+        //     val midletName = props?.getValue("MIDlet-Name")?.trim() ?: "Demo MIDlet"
+        //     val apkName = midletName.replace("[/\\\\:*?\"<>|]".toRegex(), "").replace(" ", "_")
+        //     applicationId = "com.example.androidlet.${apkName.lowercase(Locale.getDefault())}"
+        //     versionName = props?.getValue("MIDlet-Version") ?: "1.0"
+        //     resValue("string", "app_name", midletName)
+        //     proguardFiles(
+        //         getDefaultProguardFile("proguard-android-optimize.txt"),
+        //         "proguard-midlet.pro"
+        //     )
+        // }
     }
 
     splits {
         abi {
             isEnable = true
-            reset()
-            include("x86", "armeabi-v7a", "x86_64", "arm64-v8a")
-            isUniversalApk = true
+           reset()
+            //include("x86", "armeabi-v7a", "x86_64", "arm64-v8a")
+            include("arm64-v8a")
+           isUniversalApk = false //true
+            
         }
-    }
+   }
 
     externalNativeBuild {
         ndkBuild {
-            path("src/main/cpp/Android.mk")
+           path("src/main/cpp/Android.mk")
         }
     }
 
@@ -134,7 +145,6 @@ fun getMidletManifestProperties(): Attributes? {
 
 dependencies {
     implementation(project(":dexlib"))
-
     val roomVersion = "2.6.1"
     annotationProcessor("androidx.room:room-compiler:$roomVersion")
     implementation("androidx.room:room-runtime:$roomVersion")

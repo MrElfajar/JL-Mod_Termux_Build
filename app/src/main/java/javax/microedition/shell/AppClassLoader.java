@@ -60,6 +60,11 @@ public class AppClassLoader extends DexClassLoader {
 
 	public static InputStream getResourceAsStream(Class<?> resClass, String resName) {
 		Log.d(TAG, "CUSTOM GET RES CALLED WITH PATH: " + resName);
+		if(resClass != null && resClass.getPackage() != null){
+      Log.d(TAG, "CUSTOM GET RES CALLED RESCLASS: " + resClass.getPackage().getName());
+
+		}
+     
 		if (resName == null || resName.equals("")) {
 			Log.w(TAG, "Can't load res on empty path");
 			return null;
@@ -70,7 +75,7 @@ public class AppClassLoader extends DexClassLoader {
 		normName = normName.replaceAll("//+", "/");
 		if (normName.charAt(0) != '/' && resClass != null && resClass.getPackage() != null) {
 			String className = resClass.getPackage().getName().replace('.', '/');
-			normName = className + "/" + normName;
+ 			normName = className + "/" + normName;
 		}
 		// Remove leading slash
 		if (normName.charAt(0) == '/') {

@@ -10,7 +10,8 @@
         android:id="@android:id/list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        android:paddingBottom="200dp"
+       tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         tools:spanCount="4"
         tools:itemCount="12"
         tools:listitem="@layout/list_row_grid_jar"/>
